@@ -9,7 +9,8 @@
 1. **Check `registry-status.json` exists** in the project root
 2. **Verify status is "completed"** 
 3. **Verify not expired** (expires_at > current timestamp)
-4. **If ANY condition fails**: Guide user through initialization - DO NOT proceed with component operations
+4. **Verify documentation_read is true** - Agent has completed mandatory reading
+5. **If ANY condition fails**: Guide user through initialization or documentation reading - DO NOT proceed with component operations
 
 ## 🔒 Initialization Gate
 
@@ -17,6 +18,7 @@
 // registry-status.json must look like this for agent to proceed:
 {
   "status": "completed",
+  "documentation_read": true, // Must be true for MCP operations
   "expires_at": "2025-10-27T10:30:00.000Z", // Must be future
   "selected_registries": ["@shadcn", "@aceternity", "..."],
   "validation_results": { /* all registries passed */ }
@@ -29,6 +31,12 @@
 ✅ Guide user: Run './scripts/setup.sh' to initialize registries
 ```
 
+**If documentation_read is NOT true:**
+```
+❌ STOP: Agent documentation reading required
+✅ Agent action: Complete AGENT_DOCUMENTATION_CHECKLIST.md first
+```
+
 ## 📋 Agent Workflow
 
 ### 1. Pre-Check (MANDATORY)
@@ -37,7 +45,8 @@
 1. registry-status.json exists
 2. status === "completed" 
 3. expires_at > now()
-4. selected_registries is populated
+4. documentation_read === true
+5. selected_registries is populated
 ```
 
 ### 2. Component Discovery
@@ -111,6 +120,14 @@ For icons: @icons-pqoqubbw
 ```javascript
 if (!exists('registry-status.json')) {
   return "Registry not initialized. Run './scripts/setup.sh' first."
+}
+```
+
+### Documentation Not Read
+```javascript
+const status = JSON.parse(readFile('registry-status.json'))
+if (status.documentation_read !== true) {
+  return "Agent must complete documentation reading checklist first. Reading CLAUDE_AGENT_FIRST_READ.md..."
 }
 ```
 
@@ -201,11 +218,12 @@ Agents can suggest these to users:
 
 ### Debug Checklist for Agents
 1. ✅ `registry-status.json` exists and has `"status": "completed"`
-2. ✅ `expires_at` is in the future
-3. ✅ `selected_registries` array is populated
-4. ✅ `validation_results` shows passing registries
-5. ✅ `components.json` exists with matching registries
-6. ✅ `registry-components-cache.json` has cached data
+2. ✅ `documentation_read` is `true` (agent has read docs)
+3. ✅ `expires_at` is in the future
+4. ✅ `selected_registries` array is populated
+5. ✅ `validation_results` shows passing registries
+6. ✅ `components.json` exists with matching registries
+7. ✅ `registry-components-cache.json` has cached data
 
 ### Recovery Steps
 ```bash

@@ -26,6 +26,7 @@ Before using ANY MCP shadcn tools or adding components, you MUST:
 1. **Check if `registry-status.json` exists** in the project root
 2. **Verify status is "completed"** 
 3. **Verify expires_at is not older than 24 hours**
+4. **Verify documentation_read is true** - Ensures agent has read all required docs
 
 ### 🚫 IF ANY CONDITION FAILS: STOP AND GUIDE USER
 
@@ -34,6 +35,7 @@ Before using ANY MCP shadcn tools or adding components, you MUST:
 - registry-status.json does not exist
 - status is not "completed" 
 - expires_at timestamp is in the past
+- documentation_read is not true (agent must read docs first)
 ```
 
 ### ✅ REQUIRED STATUS FORMAT
@@ -41,6 +43,7 @@ Before using ANY MCP shadcn tools or adding components, you MUST:
 ```json
 {
   "status": "completed",
+  "documentation_read": true,
   "expires_at": "2025-10-27T10:30:00.000Z",
   "selected_registries": ["@shadcn", "@kokonutui", "..."],
   "validation_results": { /* all registries must be true */ }
@@ -65,6 +68,13 @@ Run this command to start setup:
 ./shadcn-registries-package/scripts/setup.sh
 
 I'll wait for you to complete the setup, then we can add components."
+```
+
+**If documentation_read is false, tell user:**
+```
+"The registries are set up, but I need to read the documentation first to safely use the MCP tools.
+
+Let me complete the mandatory documentation reading checklist, then I can help you add components."
 ```
 
 ### 📋 QUICK REFERENCE
