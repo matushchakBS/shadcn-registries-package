@@ -21,6 +21,11 @@
   "documentation_read": true, // Must be true for MCP operations
   "expires_at": "2025-10-27T10:30:00.000Z", // Must be future
   "selected_registries": ["@shadcn", "@aceternity", "..."],
+  "registry_priorities": {
+    "@shadcn": 1,     // Lower number = higher priority
+    "@aceternity": 2,
+    "@eldoraui": 3
+  },
   "validation_results": { /* all registries passed */ }
 }
 ```
@@ -72,7 +77,14 @@
 - Use mcp__shadcn__get_add_command_for_items
 - Execute the returned command
 
-# Preferred order for component selection:
+# CRITICAL: Component Selection Priority
+ALWAYS respect the registry_priorities order from registry-status.json:
+- Read registry_priorities field to determine preference order
+- When multiple registries have similar components, choose from highest priority registry
+- Lower numbers = higher priority (e.g., priority 1 > priority 2)
+- This ensures consistent design system and user preferences
+
+# Default Fallback Priority Order (if no custom priorities set):
 1. @shadcn (official)
 2. @kokonutui (100+ components, modern)
 3. @aceternity (91 components, animations)
@@ -221,9 +233,10 @@ Agents can suggest these to users:
 2. ✅ `documentation_read` is `true` (agent has read docs)
 3. ✅ `expires_at` is in the future
 4. ✅ `selected_registries` array is populated
-5. ✅ `validation_results` shows passing registries
-6. ✅ `components.json` exists with matching registries
-7. ✅ `registry-components-cache.json` has cached data
+5. ✅ `registry_priorities` object exists and defines priority order
+6. ✅ `validation_results` shows passing registries
+7. ✅ `components.json` exists with matching registries
+8. ✅ `registry-components-cache.json` has cached data
 
 ### Recovery Steps
 ```bash

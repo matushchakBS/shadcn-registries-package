@@ -4,9 +4,10 @@
   "initialized_at": null,
   "expires_at": null,
   "selected_registries": [],
+  "registry_priorities": {},
   "validation_results": {},
   "component_cache_file": "registry-components-cache.json",
   "last_error": null,
   "total_components": 0,
-  "notes": "Status must be 'completed', documentation_read must be true, and not expired for CLI agents to proceed"
+  "notes": "Status must be 'completed', documentation_read must be true, and not expired for CLI agents to proceed. Registry priorities indicate preference order for component selection (lower numbers = higher priority)."
 }

@@ -46,6 +46,11 @@ Before using ANY MCP shadcn tools or adding components, you MUST:
   "documentation_read": true,
   "expires_at": "2025-10-27T10:30:00.000Z",
   "selected_registries": ["@shadcn", "@kokonutui", "..."],
+  "registry_priorities": {
+    "@shadcn": 1,
+    "@kokonutui": 2,
+    "@eldoraui": 3
+  },
   "validation_results": { /* all registries must be true */ }
 }
 ```
@@ -105,13 +110,21 @@ Once status is "completed" and not expired, you can safely use:
 
 ## 🎯 REGISTRY PRIORITY ORDER
 
-When suggesting components, prefer this order:
+**CRITICAL**: Agents MUST respect the priority order defined in `registry_priorities` field of registry-status.json.
+
+**Default Priority Order (when no custom priorities set):**
 1. @shadcn (official, 449 components)
 2. @kokonutui (modern, 100+ components)  
 3. @aceternity (animations, 91 components)
 4. @eldoraui (text animations, 87 components)
 5. @cult (interactions, 82 components)
 6. Other configured registries
+
+**Why Priority Matters:**
+- **Component Selection**: When multiple registries have similar components, choose from higher priority registry
+- **User Experience**: Ensures consistent design system by preferring certain registries
+- **Performance**: Reduces decision overhead by having clear preference order
+- **Project Consistency**: Maintains cohesive component selection across sessions
 
 ---
 
