@@ -1,0 +1,14 @@
+# Generated files (when package is installed in a project)
+registry-status.json
+registry-components-cache.json
+components.json
+
+# Temporary files
+*.tmp
+.DS_Store
+
+# Node modules (if any)
+node_modules/
+
+# Logs
+*.log

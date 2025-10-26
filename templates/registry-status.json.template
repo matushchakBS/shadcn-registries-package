@@ -1,0 +1,11 @@
+{
+  "status": "pending",
+  "initialized_at": null,
+  "expires_at": null,
+  "selected_registries": [],
+  "validation_results": {},
+  "component_cache_file": "registry-components-cache.json",
+  "last_error": null,
+  "total_components": 0,
+  "notes": "Status must be 'completed' and not expired for CLI agents to proceed"
+}

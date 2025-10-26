@@ -1,0 +1,51 @@
+{
+  "name": "shadcn-registries-package",
+  "version": "1.0.0",
+  "description": "A comprehensive collection of 13 tested and verified shadcn/ui registries with 600+ components",
+  "keywords": [
+    "shadcn",
+    "shadcn-ui",
+    "react",
+    "typescript",
+    "tailwindcss",
+    "components",
+    "ui",
+    "registries"
+  ],
+  "author": "Generated with Claude Code",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/shadcn-registries-package"
+  },
+  "bugs": {
+    "url": "https://github.com/username/shadcn-registries-package/issues"
+  },
+  "homepage": "https://github.com/username/shadcn-registries-package#readme",
+  "scripts": {
+    "setup": "./scripts/setup.sh",
+    "init": "./scripts/init-registries.sh",
+    "validate": "./scripts/validate-registries.sh",
+    "reset": "./scripts/reset-cache.sh"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "typescript": ">=5.0.0",
+    "@types/react": ">=18.0.0"
+  },
+  "devDependencies": {
+    "jq": "^1.6.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "docs/",
+    "scripts/",
+    "templates/",
+    "test-results/",
+    "README.md",
+    "CLAUDE_AGENT_FIRST_READ.md",
+    ".gitignore"
+  ]
+}
