@@ -1,67 +1,116 @@
 # Shadcn Registry Testing Results
 
+## Latest Test: 2026-02-22 (via shadcn MCP tools)
+## Previous Test: 2025-10-26 (via URL fetching)
+
+---
+
 ## Summary
-Tested 18 potential shadcn registries. **12 working**, **3 not found**, **3 separate CLIs**.
+Tested 15 configured registries via `mcp__shadcn__list_items_in_registries`. **11 fully working**, **1 partial**, **3 broken**.
 
-## ✅ Working Registries (12)
+## Fully Working Registries (10) - Full MCP Support
 
-### Already Configured & Working in MCP
-- **@cult** - https://cult-ui.com/r/{name}.json (82 components)
-- **@kibo** - https://www.kibo-ui.com/r/{name}.json 
-- **@reui** - https://reui.io/r/{name}.json
+| Registry | Items | URL Pattern | Specialization |
+|----------|-------|-------------|----------------|
+| **@shadcn** | 403 | `https://ui.shadcn.com/registry/{name}.json` | Official core components |
+| **@aceternity** | 101 | `https://ui.aceternity.com/registry/{name}.json` | Advanced animations & effects |
+| **@cult** | 98 | `https://cult-ui.com/r/{name}.json` | Framer Motion components |
+| **@kibo** | 41 | `https://www.kibo-ui.com/r/{name}.json` | Extended shadcn functionality |
+| **@kokonutui** | 40 | `https://kokonutui.com/r/{name}.json` | Modern animations, Vercel OSS |
+| **@magicui** | 207 | `https://magicui.design/r/{name}.json` | Professional design patterns |
+| **@retroui** | 97 | `https://retroui.dev/r/{name}.json` | Vintage/retro themes |
+| **@animate-ui** | 580 | `https://animate-ui.com/r/{name}.json` | Motion & transitions (largest!) |
+| **@diceui** | 239 | `https://diceui.com/r/{name}.json` | Accessibility-focused |
+| **@eldoraui** | 115 | `https://eldoraui.site/r/{name}.json` | Text animations & device mockups |
+| **@ai-elements** | 77 | `https://registry.ai-sdk.dev/{name}.json` | AI-native components (Vercel AI SDK) |
 
-### Newly Added & Working
-- **@kokonutui** - https://kokonutui.com/r/{name}.json (100+ components)
-- **@magicui** - https://magicui.design/r/{name}.json
-- **@neobrutalism** - https://neobrutalism.dev/r/{name}.json
-- **@retroui** - https://retroui.dev/r/{name}.json
-- **@animate-ui** - https://animate-ui.com/r/{name}.json
-- **@diceui** - https://diceui.com/r/{name}.json
-- **@icons-pqoqubbw** - https://icons.pqoqubbw.dev/c/{name}.json
+**Total: ~1,998 discoverable items across 11 registries**
 
-### Direct URL Only (No Registry Config)
-- **Origin UI (COSS)** - https://coss.com/origin/r/{comp}.json
-- **ShadcnUI Blocks** - https://www.shadcnui-blocks.com/r/{name}.json
-- **Jolly UI** - https://jollyui.dev/default/{name}
+## Partially Working Registries (1) - Individual Items Only
 
-## ❌ Not Working (6)
+| Registry | URL Pattern | Issue |
+|----------|-------------|-------|
+| **@neobrutalism** | `https://neobrutalism.dev/r/{name}.json` | No `registry.json` index. `list` and `search` MCP calls fail, but `view_items` works if you know the component name (e.g. `@neobrutalism/accordion`). |
 
-### Not Found (3)
-- **Skiper UI** - Domain offline (skiper-ui.dev)
-- **Irsyad UI** - Domain not found (irsyadadl.com)
-- **Eldora UI** - Domain offline (eldoraui.com)
+## Broken Registries (3) - Not Working
 
-### Separate CLIs (3)
-- **AI Elements** - Uses `npx ai-elements@latest add`
-- **ElevenLabs** - Uses `pnpm dlx @elevenlabs/cli@latest components add`
-- **Kibo UI** - Also has `npx kibo-ui add` (but registry works too)
+| Registry | URL Pattern | Error | Notes |
+|----------|-------------|-------|-------|
+| **@reui** | `https://reui.io/r/{name}.json` | 404 on registry.json AND individual items | Was working 2025-10-26, now dead |
+| **@icons-pqoqubbw** | `https://icons.pqoqubbw.dev/c/{name}.json` | 404 on registry.json AND individual items | Was working 2025-10-26, now dead |
+| **@originui** | `https://originui.com/r/{name}.json` | Returns HTML, not JSON | Wrong URL. Old test used `https://coss.com/origin/r/{comp}.json` which may still work |
 
-## Usage Recommendations
+---
 
-### For Modern Animations
-- **@kokonutui** - 100+ components, Motion animations, Vercel OSS
-- **@animate-ui** - Focus on transitions and motion
-- **@cult** - Framer Motion components (already working)
+## Changes Since Previous Test (2025-10-26)
+
+### Registries That Died
+- **@reui** - Domain returns 404 for all endpoints
+- **@icons-pqoqubbw** - Domain returns 404 for all endpoints
+
+### Component Count Changes
+| Registry | Old Count | New Count | Change |
+|----------|-----------|-----------|--------|
+| @shadcn | 449 | 403 | -46 (restructured?) |
+| @aceternity | 91 | 101 | +10 |
+| @cult | 82 | 98 | +16 |
+| @kibo | unknown | 41 | now known |
+| @kokonutui | 100+ | 40 | -60 (restructured or was overcounted) |
+| @magicui | unknown | 207 | now known |
+| @retroui | unknown | 97 | now known |
+| @animate-ui | unknown | 580 | now known (largest registry!) |
+| @diceui | unknown | 239 | now known |
+| @eldoraui | 87 | 115 | +28 |
+| @neobrutalism | unknown | N/A | no index, individual items work |
+
+### New Discovery
+- **@originui** is in the live `components.json` at `/Users/pavlo/cogni-base/components.json` but uses wrong URL (`originui.com` instead of `coss.com`)
+
+---
+
+## Usage Recommendations (Updated)
+
+### For Animations (Best Options)
+- **@animate-ui** - 580 items, largest animation registry
+- **@aceternity** - 101 items, spectacular visual effects
+- **@eldoraui** - 115 items, text animations & device mockups
+- **@cult** - 98 items, Framer Motion components
+
+### For Professional/Production UI
+- **@shadcn** - 403 items, official foundation
+- **@magicui** - 207 items, professional design patterns
+- **@diceui** - 239 items, accessibility-focused
 
 ### For Distinctive Styles
-- **@neobrutalism** - Bold borders, distinctive aesthetic
-- **@retroui** - Vintage/retro themes
-- **@magicui** - Modern design patterns
-
-### For Specialized Use Cases
-- **@diceui** - Accessibility-focused components
-- **@icons-pqoqubbw** - Animated icons with programmatic control
-- **@reui** - Complex form components (already working)
+- **@neobrutalism** - Bold brutalist aesthetic (partial MCP support)
+- **@retroui** - 97 items, vintage/retro themes
 
 ### For Extended Functionality
-- **@kibo** - Extends shadcn/ui with additional components (already working)
+- **@kibo** - 41 items, extends shadcn with utilities
+- **@kokonutui** - 40 items, modern components, Vercel OSS
 
-## Updated components.json
-All working registries have been added to components.json. Total of **12 registries** now available for use.
+---
 
-## Testing Methodology Lessons
-1. **Always test actual URLs first** before assumptions
-2. **Check both with/without www subdomains**
-3. **Some registries use separate CLIs** (not shadcn-compatible)
-4. **MCP server caching requires restart** to pick up new registries
-5. **Direct URL imports work even without registry config**
+## Registries NOT in components.json (from previous test, untested in MCP)
+
+These were tested via direct URL in 2025-10-26 but never added to `components.json`:
+- **Origin UI (COSS)** - `https://coss.com/origin/r/{comp}.json` (was working)
+- **ShadcnUI Blocks** - `https://www.shadcnui-blocks.com/r/{name}.json` (was working)
+- **Jolly UI** - `https://jollyui.dev/default/{name}` (was working)
+
+### Separate CLIs (not shadcn-compatible)
+- **AI Elements** - `npx ai-elements@latest add`
+- **ElevenLabs** - `pnpm dlx @elevenlabs/cli@latest components add`
+
+### Confirmed Dead (from previous test)
+- **Skiper UI** - Domain offline (skiper-ui.dev)
+- **Irsyad UI** - Domain not found (irsyadadl.com)
+
+---
+
+## Testing Methodology
+1. Configured all registries in `components.json`
+2. Used `mcp__shadcn__get_project_registries` to verify MCP sees them
+3. Used `mcp__shadcn__list_items_in_registries` per registry (limit=3) to test index
+4. For failed registries, used `mcp__shadcn__search_items_in_registries` to test search
+5. For still-failed registries, used `mcp__shadcn__view_items_in_registries` with known item names to test direct access

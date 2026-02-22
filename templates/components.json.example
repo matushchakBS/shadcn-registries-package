@@ -31,6 +31,7 @@
     "@animate-ui": "https://animate-ui.com/r/{name}.json",
     "@diceui": "https://diceui.com/r/{name}.json",
     "@icons-pqoqubbw": "https://icons.pqoqubbw.dev/c/{name}.json",
-    "@eldoraui": "https://eldoraui.site/r/{name}.json"
+    "@eldoraui": "https://eldoraui.site/r/{name}.json",
+    "@ai-elements": "https://registry.ai-sdk.dev/{name}.json"
   }
 }
